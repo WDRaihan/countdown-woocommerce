@@ -51,7 +51,16 @@ class CDW_COUNTDOWN {
 	 * @since    1.0.0
 	 */
 	function enqueue_scripts() {
-		wp_enqueue_script( 'cdw_script', CDW_DIR_URL . 'assets/js/countdown.js', array('jquery'), CDW_VERSION, true );
+		if ( function_exists( 'is_product' ) ) {
+			// Check if we are on a single product page
+			if ( is_product() ) {
+				$product_id = get_the_ID();
+				$enable_countdown = !empty(get_post_meta($product_id, 'cdw_enable_countdown', true)) ? get_post_meta($product_id, 'cdw_enable_countdown', true) : '';
+				if($enable_countdown == '1'){
+					wp_enqueue_script( 'cdw_script', CDW_DIR_URL . 'assets/js/countdown.js', array('jquery'), CDW_VERSION, true );
+				}
+			}
+		}
 	}
 	
 	/**
