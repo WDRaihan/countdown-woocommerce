@@ -1,3 +1,5 @@
+'use strict';
+
 var countdown_woocommerce = document.querySelector("#cdw_countdown");
 
 if(countdown_woocommerce) {
